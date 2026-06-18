@@ -1,13 +1,11 @@
 from datetime import date
 from flask import Blueprint, render_template
-from flask_login import login_required
 from ..models import Equipment, WorkOrder, MaintenanceRecord, SparePart, equipment_overdue_query
 from .. import db
 
 main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
-@login_required
 def dashboard():
     total_equipment = Equipment.query.count()
     status_counts = db.session.query(Equipment.current_status, db.func.count(Equipment.id)).group_by(Equipment.current_status).all()
