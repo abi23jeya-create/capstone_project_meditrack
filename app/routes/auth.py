@@ -10,14 +10,21 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     form = LoginForm()
 
-    print("=" * 50)
+    print("=" * 60)
     print("REQUEST METHOD:", request.method)
 
     if request.method == "POST":
         print("FORM DATA:", request.form)
-        print("FORM ERRORS:", form.errors)
 
-    if form.validate_on_submit():
+    # Explicit validation debug
+    valid = form.validate()
+    print("FORM VALID:", valid)
+    print("FORM ERRORS:", form.errors)
+
+    if hasattr(form, "csrf_token"):
+        print("CSRF ERRORS:", form.csrf_token.errors)
+
+    if request.method == "POST" and valid:
         print("FORM VALIDATED")
 
         user = User.query.filter_by(email=form.email.data).first()
@@ -28,6 +35,7 @@ def login():
                 user.password_hash,
                 form.password.data
             )
+
             print("PASSWORD MATCH:", password_match)
 
             if password_match:
@@ -36,11 +44,9 @@ def login():
                 return redirect(url_for('main.dashboard'))
 
         flash('Invalid email or password.', 'danger')
-    else:
-        if request.method == "POST":
-            print("FORM VALIDATION FAILED")
 
     return render_template('login.html', form=form)
+
 
 @auth_bp.route('/logout')
 @login_required
