@@ -5,9 +5,9 @@ After=network.target
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/meditrack-production
-EnvironmentFile=/home/ubuntu/meditrack-production/.env
-ExecStart=/home/ubuntu/meditrack-production/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 wsgi:app
+WorkingDirectory=/home/ubuntu/capstone_project_meditrack
+EnvironmentFile=/home/ubuntu/capstone_project_meditrack/.env
+ExecStart=/home/ubuntu/capstone_project_meditrack/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:5000 wsgi:app
 Restart=always
 
 [Install]
