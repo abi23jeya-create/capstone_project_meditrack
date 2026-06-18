@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} · Equipment Form{% endblock %}
+{% block page_title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="card form-card">
+  <form method="post" class="form-grid two-up">
+    {{ form.hidden_tag() }}
+    <label>{{ form.asset_tag.label }} {{ form.asset_tag(class_='input') }}</label>
+    <label>{{ form.serial_number.label }} {{ form.serial_number(class_='input') }}</label>
+    <label>{{ form.category_id.label }} {{ form.category_id(class_='input') }}</label>
+    <label>{{ form.manufacturer_id.label }} {{ form.manufacturer_id(class_='input') }}</label>
+    <label>{{ form.model_number.label }} {{ form.model_number(class_='input') }}</label>
+    <label>{{ form.purchase_date.label }} {{ form.purchase_date(class_='input') }}</label>
+    <label>{{ form.warranty_expiry.label }} {{ form.warranty_expiry(class_='input') }}</label>
+    <label>{{ form.current_status.label }} {{ form.current_status(class_='input') }}</label>
+    <label>{{ form.criticality_level.label }} {{ form.criticality_level(class_='input') }}</label>
+    <label>{{ form.department_id.label }} {{ form.department_id(class_='input') }}</label>
+    <label>{{ form.location_id.label }} {{ form.location_id(class_='input') }}</label>
+    <div>{{ form.submit(class_='btn btn-primary') }}</div>
+  </form>
+</div>
+{% endblock %}

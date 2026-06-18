@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} · Reports{% endblock %}
+{% block page_title %}Reporting Center{% endblock %}
+{% block content %}
+<section class="grid two-col">
+  <article class="card"><h2>Maintenance cost by asset</h2><table class="table"><thead><tr><th>Asset</th><th>Cost</th></tr></thead><tbody>{% for asset_tag, cost in maintenance_costs %}<tr><td>{{ asset_tag }}</td><td>₹ {{ '%.2f'|format(cost or 0) }}</td></tr>{% endfor %}</tbody></table></article>
+  <article class="card"><h2>Work order status</h2><table class="table"><thead><tr><th>Status</th><th>Count</th></tr></thead><tbody>{% for status, count in work_order_counts %}<tr><td>{{ status }}</td><td>{{ count }}</td></tr>{% endfor %}</tbody></table></article>
+</section>
+<section class="card"><h2>Low stock items</h2><div class="list">{% for part in low_stock %}<div class="list-row"><strong>{{ part.name }}</strong><span class="badge badge-warning">{{ part.quantity }} / {{ part.reorder_level }}</span></div>{% else %}<p class="muted">No low stock alerts.</p>{% endfor %}</div></section>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediTrack Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <h1>MediTrack</h1>
+    <p class="muted">Sign in with the seeded administrator account.</p>
+    <form method="post" class="form-grid">
+      {{ form.hidden_tag() }}
+      <label>{{ form.email.label }} {{ form.email(class_='input') }}</label>
+      <label>{{ form.password.label }} {{ form.password(class_='input') }}</label>
+      {{ form.submit(class_='btn btn-primary') }}
+    </form>
+    <p class="small muted">Default login: admin@meditrack.local / Admin@123</p>
+  </div>
+<script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

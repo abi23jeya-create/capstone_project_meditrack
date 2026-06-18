@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} · Spare Parts{% endblock %}
+{% block page_title %}Spare Parts Inventory{% endblock %}
+{% block content %}
+<div class="page-actions"><a class="btn btn-primary" href="{{ url_for('inventory.new_spare_part') }}">Add spare part</a></div>
+<div class="card"><table class="table"><thead><tr><th>Part</th><th>Number</th><th>Stock</th><th>Reorder Level</th><th>Vendor</th></tr></thead><tbody>{% for part in parts %}<tr><td>{{ part.name }}</td><td>{{ part.part_number }}</td><td>{{ part.quantity }}</td><td>{{ part.reorder_level }}</td><td>{{ part.vendor.name }}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

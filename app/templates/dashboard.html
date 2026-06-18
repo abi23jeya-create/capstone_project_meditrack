@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} · Dashboard{% endblock %}
+{% block page_title %}Operations Dashboard{% endblock %}
+{% block content %}
+<section class="grid cards-4">
+  <article class="card kpi"><span>Total equipment</span><strong>{{ total_equipment }}</strong></article>
+  <article class="card kpi"><span>Open work orders</span><strong>{{ open_work_orders }}</strong></article>
+  <article class="card kpi"><span>Low stock parts</span><strong>{{ low_stock }}</strong></article>
+  <article class="card kpi"><span>Maintenance spend</span><strong>₹ {{ '%.2f'|format(maintenance_cost or 0) }}</strong></article>
+</section>
+<section class="grid two-col">
+  <article class="card">
+    <h2>Status mix</h2>
+    <table class="table"><thead><tr><th>Status</th><th>Count</th></tr></thead><tbody>{% for status, count in status_counts %}<tr><td>{{ status }}</td><td>{{ count }}</td></tr>{% endfor %}</tbody></table>
+  </article>
+  <article class="card">
+    <h2>Overdue maintenance</h2>
+    <div class="list">{% for item in overdue %}<div class="list-row"><div><strong>{{ item.asset_tag }}</strong><p class="muted">{{ item.category.name }} · {{ item.department.name }}</p></div><span class="badge badge-danger">Overdue</span></div>{% else %}<p class="muted">No overdue assets.</p>{% endfor %}</div>
+  </article>
+</section>
+{% endblock %}

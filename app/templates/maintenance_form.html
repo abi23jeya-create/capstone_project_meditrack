@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %} · Maintenance Form{% endblock %}
+{% block page_title %}Add Maintenance Record{% endblock %}
+{% block content %}
+<div class="card form-card"><form method="post" class="form-grid">{{ form.hidden_tag() }}<label>{{ form.equipment_id.label }} {{ form.equipment_id(class_='input') }}</label><label>{{ form.work_order_id.label }} {{ form.work_order_id(class_='input') }}</label><label>{{ form.maintenance_type.label }} {{ form.maintenance_type(class_='input') }}</label><label>{{ form.date_performed.label }} {{ form.date_performed(class_='input') }}</label><label>{{ form.cost.label }} {{ form.cost(class_='input') }}</label><label>{{ form.next_due_date.label }} {{ form.next_due_date(class_='input') }}</label><label class="full">{{ form.findings.label }} {{ form.findings(class_='input', rows='3') }}</label><label class="full">{{ form.actions_taken.label }} {{ form.actions_taken(class_='input', rows='3') }}</label><div>{{ form.submit(class_='btn btn-primary') }}</div></form></div>
+{% endblock %}

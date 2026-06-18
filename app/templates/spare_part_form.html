@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %} · Spare Part Form{% endblock %}
+{% block page_title %}Add Spare Part{% endblock %}
+{% block content %}
+<div class="card form-card"><form method="post" class="form-grid">{{ form.hidden_tag() }}<label>{{ form.name.label }} {{ form.name(class_='input') }}</label><label>{{ form.part_number.label }} {{ form.part_number(class_='input') }}</label><label>{{ form.quantity.label }} {{ form.quantity(class_='input') }}</label><label>{{ form.reorder_level.label }} {{ form.reorder_level(class_='input') }}</label><label>{{ form.vendor_id.label }} {{ form.vendor_id(class_='input') }}</label><div>{{ form.submit(class_='btn btn-primary') }}</div></form></div>
+{% endblock %}

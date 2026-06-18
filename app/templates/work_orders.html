@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} · Work Orders{% endblock %}
+{% block page_title %}Work Orders{% endblock %}
+{% block content %}
+<div class="page-actions"><a class="btn btn-primary" href="{{ url_for('maintenance.new_work_order') }}">New work order</a></div>
+<div class="card"><table class="table"><thead><tr><th>ID</th><th>Asset</th><th>Priority</th><th>Status</th><th>Assigned</th></tr></thead><tbody>{% for item in items %}<tr><td>WO-{{ item.id }}</td><td>{{ item.equipment.asset_tag }}</td><td>{{ item.priority }}</td><td>{{ item.status }}</td><td>{{ item.assigned_technician.name if item.assigned_technician else 'Unassigned' }}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

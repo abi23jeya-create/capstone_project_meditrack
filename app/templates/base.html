@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ app_name }}{% block title %}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="shell">
+  {% if current_user.is_authenticated %}
+  <aside class="sidebar">
+    <div>
+      <div class="brand">MediTrack</div>
+      <p class="muted small">Hospital asset operations</p>
+    </div>
+    <nav class="nav">
+      <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('assets.equipment_list') }}">Assets</a>
+      <a href="{{ url_for('maintenance.work_orders') }}">Work Orders</a>
+      <a href="{{ url_for('maintenance.maintenance_records') }}">Maintenance</a>
+      <a href="{{ url_for('inventory.spare_parts') }}">Inventory</a>
+      <a href="{{ url_for('procurement.purchase_orders') }}">Procurement</a>
+      <a href="{{ url_for('compliance.overview') }}">Compliance</a>
+      <a href="{{ url_for('reports.report_center') }}">Reports</a>
+    </nav>
+  </aside>
+  {% endif %}
+  <div class="main-wrap">
+    {% if current_user.is_authenticated %}
+    <header class="topbar">
+      <div>
+        <h1>{% block page_title %}MediTrack{% endblock %}</h1>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">◐</button>
+        <span class="small muted">{{ current_user.name }} · {{ current_user.role.role_name }}</span>
+        <a class="btn btn-secondary" href="{{ url_for('auth.logout') }}">Logout</a>
+      </div>
+    </header>
+    {% endif %}
+    <main id="main" class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} · Asset Detail{% endblock %}
+{% block page_title %}{{ equipment.asset_tag }}{% endblock %}
+{% block content %}
+<section class="grid two-col">
+  <article class="card">
+    <h2>Asset profile</h2>
+    <dl class="detail-grid">
+      <div><dt>Serial</dt><dd>{{ equipment.serial_number }}</dd></div>
+      <div><dt>Category</dt><dd>{{ equipment.category.name }}</dd></div>
+      <div><dt>Manufacturer</dt><dd>{{ equipment.manufacturer.name }}</dd></div>
+      <div><dt>Status</dt><dd>{{ equipment.current_status }}</dd></div>
+      <div><dt>Department</dt><dd>{{ equipment.department.name }}</dd></div>
+      <div><dt>Location</dt><dd>{{ equipment.location.room_number }} / Bed {{ equipment.location.bed_number }}</dd></div>
+    </dl>
+    <a class="btn btn-secondary" href="{{ url_for('assets.edit_equipment', equipment_id=equipment.id) }}">Edit</a>
+  </article>
+  <article class="card">
+    <h2>Maintenance history</h2>
+    <div class="list">{% for record in equipment.maintenance_records %}<div class="list-row stacked"><strong>{{ record.maintenance_type }}</strong><span class="small muted">{{ record.date_performed }}</span><p>{{ record.findings }}</p><p class="muted">Next due: {{ record.next_due_date or 'N/A' }}</p></div>{% else %}<p class="muted">No maintenance records yet.</p>{% endfor %}</div>
+  </article>
+</section>
+<section class="card">
+  <h2>Transfer asset</h2>
+  <form method="post" action="{{ url_for('assets.transfer_equipment', equipment_id=equipment.id) }}" class="toolbar">
+    <select name="location_id" class="input">{% for loc in equipment.department.locations + equipment.location.department.locations %}<option value="{{ loc.id }}">{{ loc.department.name }} / {{ loc.room_number }} / {{ loc.bed_number or '-' }}</option>{% endfor %}</select>
+    <button class="btn btn-primary" type="submit">Transfer</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} · Equipment{% endblock %}
+{% block page_title %}Equipment Inventory{% endblock %}
+{% block content %}
+<div class="page-actions"><a class="btn btn-primary" href="{{ url_for('assets.new_equipment') }}">Add equipment</a></div>
+<form method="get" class="toolbar">
+  <select name="department" class="input"><option value="">All departments</option>{% for dept in departments %}<option value="{{ dept.name }}" {% if request.args.get('department')==dept.name %}selected{% endif %}>{{ dept.name }}</option>{% endfor %}</select>
+  <select name="status" class="input"><option value="">All statuses</option>{% for value in statuses %}<option value="{{ value }}" {% if request.args.get('status')==value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select>
+  <button class="btn btn-secondary" type="submit">Apply</button>
+</form>
+<div class="card">
+  <table class="table">
+    <thead><tr><th>Asset Tag</th><th>Category</th><th>Department</th><th>Status</th><th>Criticality</th><th></th></tr></thead>
+    <tbody>
+      {% for item in equipment %}
+      <tr>
+        <td>{{ item.asset_tag }}</td>
+        <td>{{ item.category.name }}</td>
+        <td>{{ item.department.name }}</td>
+        <td><span class="badge">{{ item.current_status }}</span></td>
+        <td>{{ item.criticality_level }}</td>
+        <td><a href="{{ url_for('assets.equipment_detail', equipment_id=item.id) }}">View</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

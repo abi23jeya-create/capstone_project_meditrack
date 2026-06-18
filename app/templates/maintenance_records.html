@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} · Maintenance Records{% endblock %}
+{% block page_title %}Maintenance Records{% endblock %}
+{% block content %}
+<div class="page-actions"><a class="btn btn-primary" href="{{ url_for('maintenance.new_record') }}">Add record</a></div>
+<div class="card"><table class="table"><thead><tr><th>Date</th><th>Asset</th><th>Type</th><th>Cost</th><th>Next Due</th></tr></thead><tbody>{% for record in records %}<tr><td>{{ record.date_performed }}</td><td>{{ record.equipment.asset_tag }}</td><td>{{ record.maintenance_type }}</td><td>₹ {{ '%.2f'|format(record.cost or 0) }}</td><td>{{ record.next_due_date or 'N/A' }}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

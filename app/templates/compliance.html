@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} · Compliance{% endblock %}
+{% block page_title %}Compliance Center{% endblock %}
+{% block content %}
+<section class="grid three-col">
+  <article class="card"><h2>Documents</h2><div class="list">{% for doc in docs %}<div class="list-row stacked"><strong>{{ doc.document_type }}</strong><span class="small muted">{{ doc.equipment.asset_tag }}</span><span class="muted">Expiry: {{ doc.expiry_date or 'N/A' }}</span></div>{% else %}<p class="muted">No documents recorded.</p>{% endfor %}</div></article>
+  <article class="card"><h2>Calibration</h2><div class="list">{% for item in calibrations %}<div class="list-row stacked"><strong>{{ item.equipment.asset_tag }}</strong><span class="muted">Next due: {{ item.next_due_date }}</span></div>{% else %}<p class="muted">No calibration records yet.</p>{% endfor %}</div></article>
+  <article class="card"><h2>Contracts</h2><div class="list">{% for contract in contracts %}<div class="list-row stacked"><strong>{{ contract.vendor.name }}</strong><span class="muted">{{ contract.coverage_type }}</span><span class="muted">Ends: {{ contract.end_date }}</span></div>{% else %}<p class="muted">No active service contracts.</p>{% endfor %}</div></article>
+</section>
+{% endblock %}

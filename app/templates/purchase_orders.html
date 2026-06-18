@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %} · Purchase Orders{% endblock %}
+{% block page_title %}Purchase Orders{% endblock %}
+{% block content %}
+<div class="card"><table class="table"><thead><tr><th>PO</th><th>Vendor</th><th>Date</th><th>Status</th><th>Total</th></tr></thead><tbody>{% for order in orders %}<tr><td>PO-{{ order.id }}</td><td>{{ order.vendor.name }}</td><td>{{ order.date }}</td><td>{{ order.status }}</td><td>₹ {{ '%.2f'|format(order.total_amount or 0) }}</td></tr>{% else %}<tr><td colspan="5" class="muted">No purchase orders created yet.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %} · New Work Order{% endblock %}
+{% block page_title %}Create Work Order{% endblock %}
+{% block content %}
+<div class="card form-card"><form method="post" class="form-grid">{{ form.hidden_tag() }}<label>{{ form.equipment_id.label }} {{ form.equipment_id(class_='input') }}</label><label>{{ form.priority.label }} {{ form.priority(class_='input') }}</label><label>{{ form.status.label }} {{ form.status(class_='input') }}</label><label>{{ form.assigned_to.label }} {{ form.assigned_to(class_='input') }}</label><label class="full">{{ form.issue_description.label }} {{ form.issue_description(class_='input', rows='4') }}</label><div>{{ form.submit(class_='btn btn-primary') }}</div></form></div>
+{% endblock %}
